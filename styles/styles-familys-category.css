@@ -1,0 +1,375 @@
+/* Reset כללי */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* סרגל ניווט ראשי */
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4); 
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-height: 50px;
+    transition: transform 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+/* סרגל ניווט - קטגוריות */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+nav ul li {
+    position: relative;
+    margin-right: 20px;
+}
+
+/* עיצוב הקישורים בתפריט */
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: color 0.3s ease;
+}
+
+/* Hover על הקישורים בתפריט */
+nav ul li:hover > a {
+    color: #e63946;
+}
+
+/* עיצוב התפריט הנפתח */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 160%;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 200px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    opacity: 0; /* מתחילים עם שקיפות */
+    pointer-events: none; /* מבטלים את אפשרות הלחיצה על התפריט */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* תוספת טרנזישן כדי להחלקה חלקה */
+}
+
+/* כאשר העכבר על פריט בתפריט הראשי, הצג את התפריט */
+nav ul li:hover .dropdown {
+    display: block; /* התפריט ייראה */
+    /*opacity: 1; /* שקיפות מלאה */
+    pointer-events: auto; /* אפשר אינטראקציה עם התפריט */
+    transform: translateY(10px); /* תזוזה קלה למטה כדי להוסיף אפקט */
+}
+
+/* נוודא שה-dropdown לא ייעלם כשמעבירים את העכבר אל התפריט הנפתח */
+nav ul li:hover .dropdown,
+nav ul li .dropdown:hover {
+    opacity: 1; /* שקיפות מלאה */
+    pointer-events: auto; /* אפשר אינטראקציה */
+    transform: translateY(0px); /* לא שינויים במיקום כשעכבר על התפריט הנפתח */
+}
+
+/* עיצוב קישורים בתפריט הנפתח */
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* אפקט hover על פריטי התפריט הנפתח */
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* הצגת התפריט הנפתח כאשר מעבירים את העכבר */
+nav ul li:hover .dropdown {
+    display: block;
+}
+
+/* תמונה כרקע עם שקיפות, לא משפיעה על הגלריה */
+body::before {
+    content: "";
+    position: fixed; /* תוודא שהתמונה תהיה קבועה במסך */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg/bg-camera.jpg'); /* נתיב לתמונה שלך */
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.3; /* שקיפות נמוכה */
+    z-index: -1; /* שים את התמונה מאחורי כל התוכן */
+}
+
+/* גלריית התמונות */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 100px; /* התאם את הגובה לפי הצורך */
+    padding: 20px;
+    justify-content: center;
+}
+
+.gallery-item {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+/* כותרת המשפחה */
+.family-name {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.family-name h3 {
+    margin-bottom: 5px;
+}
+
+.family-name hr {
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid white;
+    margin-top: 5px;
+}
+
+/* overlay שקיפות על התמונות */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* שקיפות על 50% */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+/* עיצוב המודל פופאפ */
+.popup-modal {
+    display: none; /* ברירת מחדל זה מוסתר */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* התמונה בתוך המודל */
+.popup-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    border-radius: 8px;
+    transform: scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+/* אפקט פתיחה של התמונה */
+.popup-modal.show {
+    opacity: 1; /* הופך את המודל לגלוי */
+}
+
+.popup-modal.show img {
+    transform: scale(1); /* התמונה גדלה בצורה חלקה */
+}
+
+/* כפתור סגירה */
+.popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.popup-close:hover {
+    color: #e63946;
+}
+
+/* תיבת טקסט מעל לתמונה במצב hover */
+.gallery img:hover::after {
+    content: "לחץ להגדלה"; /* טקסט שיתווסף במצב hover */
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* תיקון לגלריה רספונסיבית במובייל */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* גריד עם תמונות קטנות יותר */
+    }
+}
+
+/* עבור מסכים קטנים מאוד (טלפונים ניידים) */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr; /* תמונה אחת בשורה */
+    }
+}
+
+/* Footer עיצוב */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+footer .contact-info {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+footer .contact-info span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+footer .icons {
+    font-size: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+footer .icons a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+footer .icons img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+footer .icons a:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer .contact-info span {
+        font-size: 14px;
+    }
+
+    .footer .icons {
+        gap: 10px;
+    }
+
+    .footer .icons a {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        width: 100%; /* מתאימים את רוחב הקונטיינר לנייד */
+    }
+
+    .carousel-image {
+        width: 100%; /* כל תמונה תיקח 100% מהרוחב */
+    }
+
+    .prev, .next {
+        font-size: 20px; /* חצים קטנים יותר במובייל */
+        padding: 8px; /* רווחים קטנים יותר במובייל */
+    }
+}

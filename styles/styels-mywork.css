@@ -1,0 +1,275 @@
+/* Reset כללי */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* סרגל ניווט ראשי */
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4); 
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-height: 50px;
+    transition: transform 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+/* סרגל ניווט - קטגוריות */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+nav ul li {
+    position: relative;
+    margin-right: 20px;
+}
+
+/* עיצוב הקישורים בתפריט */
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: color 0.3s ease;
+}
+
+/* Hover על הקישורים בתפריט */
+nav ul li:hover > a {
+    color: #e63946;
+}
+
+/* עיצוב התפריט הנפתח */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 160%;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 200px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    opacity: 0; /* מתחילים עם שקיפות */
+    pointer-events: none; /* מבטלים את אפשרות הלחיצה על התפריט */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* תוספת טרנזישן כדי להחלקה חלקה */
+}
+
+/* כאשר העכבר על פריט בתפריט הראשי, הצג את התפריט */
+nav ul li:hover .dropdown {
+    display: block; /* התפריט ייראה */
+    /*opacity: 1; /* שקיפות מלאה */
+    pointer-events: auto; /* אפשר אינטראקציה עם התפריט */
+    transform: translateY(10px); /* תזוזה קלה למטה כדי להוסיף אפקט */
+}
+
+/* נוודא שה-dropdown לא ייעלם כשמעבירים את העכבר אל התפריט הנפתח */
+nav ul li:hover .dropdown,
+nav ul li .dropdown:hover {
+    opacity: 1; /* שקיפות מלאה */
+    pointer-events: auto; /* אפשר אינטראקציה */
+    transform: translateY(0px); /* לא שינויים במיקום כשעכבר על התפריט הנפתח */
+}
+
+/* עיצוב קישורים בתפריט הנפתח */
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* אפקט hover על פריטי התפריט הנפתח */
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* הצגת התפריט הנפתח כאשר מעבירים את העכבר */
+nav ul li:hover .dropdown {
+    display: block;
+}
+
+/* תמונה כרקע עם שקיפות */
+body::before {
+    content: "";
+    position: fixed; /* תוודא שהתמונה תהיה קבועה במסך */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg/bg-camera.jpg');
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+/* עיצוב התוכן */
+.about-section {
+    display: flex;
+    flex-direction: column; /* סידור אנכי */
+    justify-content: flex-start; /* ממקם את התוכן מלמעלה */
+    align-items: center; /* ממקם את התוכן במרכז האופקי */
+    padding: 100px;
+    height: 100vh; /* ממלא את כל גובה המסך */
+    text-align: center; /* מרכז את כל הטקסטים */
+}
+
+/* כותרת מעל התוכן */
+.about-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 50px; /* רווח קטן מתחת לכותרת */
+    text-align: center; /* למרכז את הכותרת */
+}
+
+/* תוכן אודות */
+.about-container {
+    display: flex;
+    flex-direction: row; /* סידור אופקי של התמונה והטקסט */
+    align-items: center; /* ממקם את התמונה והטקסט במרכז */
+    justify-content: center; /* ממקם את התמונה והטקסט במרכז האופקי */
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* החלק הימני - התמונה */
+.left-side {
+    flex: 1;
+    text-align: center; /* למרכז את הטקסט */
+}
+
+/* החלק השמאלי - התמונה */
+.right-side {
+    flex: 1;
+    text-align: center; /* למרכז את התמונה */
+}
+
+/* עיצוב התמונה */
+.about-image {
+    width: 100%; /* מוודא שהתמונה ממלאת את השטח שלה */
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* עיצוב טקסט */
+.about-text {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    font-family: 'Georgia', serif;
+    text-align: center; /* למרכז את הטקסט */
+}
+
+.highlight {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e63946;
+    margin-bottom: 15px;
+}
+
+/* Footer עיצוב */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.footer .contact-info {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.footer .contact-info span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer .icons {
+    font-size: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+.footer .icons a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.footer .icons img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.footer .icons a:hover img {
+    transform: scale(1.1);
+}
+
+/* הגדרת פונט ברירת המחדל לכל הדף */
+body {
+    font-family: 'Rubik Vinyl', sans-serif;
+}
+
+/* אפשר גם להחיל את הפונט על אלמנטים מסוימים */
+.about-text {
+    font-family: 'Rubik Vinyl', sans-serif; /* פונט נקי ומודרני */
+    font-size: 18px;
+    line-height: 1.6;
+    color: #000000;
+    font-weight: 400;
+}
+
+/* אפשר גם על כותרות להחיל פונט שונה, לדוגמה כותרת ב-Poppins ב-bold */
+.about-heading {
+    font-family: 'Rubik Vinyl', sans-serif;
+    font-weight: 600; /* גרסה בולטת של הפונט */
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: 20px;
+}

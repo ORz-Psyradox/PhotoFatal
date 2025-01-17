@@ -1,0 +1,24 @@
+/* עיצוב הכותרת */
+.gallery-title {
+    text-align: center; /* ממורכז את הכותרת */
+    margin-top: 75px; /* מרווח מעל הגלריה */
+    margin-bottom: 20px; /* מרווח מתחת לכותרת */
+}
+
+/* כותרת בולטת */
+.gallery-title h1 {
+    font-family: 'Roboto', sans-serif; /* שינוי לפונט מגניב (הוסף את הפונט הזה אם אין לך אותו) */
+    font-size: 40px; /* גודל פונט גדול */
+    font-weight: 700; /* בולט */
+    color: #333; /* צבע כהה */
+    letter-spacing: 2px; /* רווחים בין האותיות */
+    text-transform: uppercase; /* כל אות גדולה */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* צללית עדינה */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+-- Header
+    <div class="gallery-title">
+        <h1>משפחת פטל</h1>
+    </div>
+    

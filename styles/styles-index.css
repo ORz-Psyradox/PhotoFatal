@@ -1,0 +1,384 @@
+/* Reset כללי */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* סרגל ניווט ראשי */
+header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    background-color: rgba(209, 206, 206, 0.616); 
+    z-index: 10;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* הגדרת הגודל של הלוגו בלבד (לא משפיע על שאר הסרגל) */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-height: 50px; /* הגדלת הלוגו */
+    width: auto; /* מתאם את הרוחב לפי הגובה */
+    transition: transform 0.3s ease;
+}
+
+/* סרגל ניווט - קטגוריות */
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+/* סרגל ניווט - קטגוריות */
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+nav ul li {
+    position: relative;
+    margin-right: 20px;
+}
+
+/* עיצוב הקישורים בתפריט */
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: color 0.3s ease;
+}
+
+/* Hover על הקישורים בתפריט */
+nav ul li:hover > a {
+    color: #e63946;
+}
+
+/* עיצוב התפריט הנפתח */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 160%;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 200px;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    opacity: 0; /* מתחילים עם שקיפות */
+    pointer-events: none; /* מבטלים את אפשרות הלחיצה על התפריט */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* תוספת טרנזישן כדי להחלקה חלקה */
+}
+
+/* כאשר העכבר על פריט בתפריט הראשי, הצג את התפריט */
+nav ul li:hover .dropdown {
+    display: block; /* התפריט ייראה */
+    /*opacity: 1; /* שקיפות מלאה */
+    pointer-events: auto; /* אפשר אינטראקציה עם התפריט */
+    transform: translateY(10px); /* תזוזה קלה למטה כדי להוסיף אפקט */
+}
+
+/* נוודא שה-dropdown לא ייעלם כשמעבירים את העכבר אל התפריט הנפתח */
+nav ul li:hover .dropdown,
+nav ul li .dropdown:hover {
+    opacity: 1; /* שקיפות מלאה */
+    pointer-events: auto; /* אפשר אינטראקציה */
+    transform: translateY(0px); /* לא שינויים במיקום כשעכבר על התפריט הנפתח */
+}
+
+/* עיצוב קישורים בתפריט הנפתח */
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* אפקט hover על פריטי התפריט הנפתח */
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* הצגת התפריט הנפתח כאשר מעבירים את העכבר */
+nav ul li:hover .dropdown {
+    display: block;
+}
+
+/* עיצוב גלריית התמונות */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* גריד גמיש שיתאים לכל רוחב */
+    gap: 20px; /* מרווחים בין התמונות */
+    margin-top: 40px;
+    padding: 10px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; /* יתאים את התמונה כך שתמלא את הריבוע */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* צללת עדינה לתמונה */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* אנימציה חלקה */
+}
+
+/* אפקט hover – הגדלת התמונה בהעברה על העכבר */
+.gallery img:hover {
+    transform: scale(1.05); /* הגדלת התמונה */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* צללית חזקה יותר */
+}
+
+/* עיצוב המודל פופאפ */
+.popup-modal {
+    display: none; /* ברירת מחדל זה מוסתר */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* התמונה בתוך המודל */
+.popup-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    border-radius: 8px;
+    transform: scale(0);
+    transition: transform 0.5s ease-out;
+}
+
+/* אפקט פתיחה של התמונה */
+.popup-modal.show {
+    opacity: 1; /* הופך את המודל לגלוי */
+}
+
+.popup-modal.show img {
+    transform: scale(1); /* התמונה גדלה בצורה חלקה */
+}
+
+/* כפתור סגירה */
+.popup-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.popup-close:hover {
+    color: #e63946;
+}
+
+/* תיבת טקסט מעל לתמונה במצב hover */
+.gallery img:hover::after {
+    content: "לחץ להגדלה"; /* טקסט שיתווסף במצב hover */
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* תיקון לגלריה רספונסיבית במובייל */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* גריד עם תמונות קטנות יותר */
+    }
+}
+
+/* עבור מסכים קטנים מאוד (טלפונים ניידים) */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr; /* תמונה אחת בשורה */
+    }
+}
+
+/* גלריית התמונות (carousel) */
+#carousel {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin-top: 65px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 1s ease-in-out;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.carousel-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 1s ease;
+}
+
+.carousel-images:hover .carousel-image img {
+    transform: scale(1.05);
+}
+
+/* חצים */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Footer עיצוב */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    z-index: 10;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.footer .contact-info {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.footer .contact-info span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer .icons {
+    font-size: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+.footer .icons a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.footer .icons img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.footer .icons a:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+    }
+
+    .footer .contact-info span {
+        font-size: 14px;
+    }
+
+    .footer .icons {
+        gap: 10px;
+    }
+
+    .footer .icons a {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-container {
+        width: 100%; /* מתאימים את רוחב הקונטיינר לנייד */
+    }
+
+    .carousel-image {
+        width: 100%; /* כל תמונה תיקח 100% מהרוחב */
+    }
+
+    .prev, .next {
+        font-size: 20px; /* חצים קטנים יותר במובייל */
+        padding: 8px; /* רווחים קטנים יותר במובייל */
+    }
+}

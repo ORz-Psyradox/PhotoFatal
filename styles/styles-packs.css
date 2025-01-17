@@ -1,0 +1,73 @@
+/* Reset כללי */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* גוף הדף */
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    font-size: 18px; /* גודל פונט כללי */
+}
+
+/* קונטיינר מרכזי */
+.container {
+    max-width: 900px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* כותרת "החבילות שלי" */
+h1 {
+    font-family: 'Pacifico', sans-serif; /* פונט מגניב */
+    font-size: 80px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* הוספת צל לכותרת */
+}
+
+/* טקסט "בקרוב הישאור מעודכנים" */
+p {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #e74c3c;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+/* עיצוב ה-details (הסבר נוסף או מידע על החבילות) */
+.details {
+    font-size: 20px;
+    color: #7f8c8d;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* גרסה רספונסיבית עבור מסכים קטנים יותר */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 50px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .details {
+        font-size: 18px;
+    }
+}
